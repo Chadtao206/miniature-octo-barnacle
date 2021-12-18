@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "path": "^0.12.7"
+  },
+  "name": "review-session",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
