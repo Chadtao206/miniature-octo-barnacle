@@ -3,21 +3,8 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const PORT = 3000;
-const { DATBASE_URL } = process.env;
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  }
-})
-
-
-module.exports = sequelize;
-
+const sequelize = require('./connection')
+const routes = require('./controller')
 const ourOwnMiddlewareFunction = (req, res, next) => {
   console.log("I'm IN THE MIDDLEWARE FUNCTION ", req.body);
   //if some conditions are met and you want to end the call early
@@ -30,6 +17,7 @@ app.use(express.json()); //bodyparser middleware
 app.use(express.urlencoded({ extended: true })); //url parser middleware
 app.use(express.static("frontend"));
 //THE FATHER SON AND SPIRIT!
+app.use(routes)
 
 app.use(ourOwnMiddlewareFunction);
 //first way, start with ? at the end of the route or endpoint, after that you can send key value pairs with the pattern
@@ -57,4 +45,5 @@ app.get("/", (req, res) => {
 sequelize.sync({ force: true })
 .then(() => {
   app.listen(PORT, () => console.log(`server is up and running on port - http://localhost:${PORT} 🚀`));
-});
+})
+.catch(err => console.log(err));

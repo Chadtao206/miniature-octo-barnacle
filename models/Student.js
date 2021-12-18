@@ -1,4 +1,5 @@
-const sequelize = require('./connection');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../connection')
 const { Model } = require('sequelize');
 
 class Student extends Model {}
@@ -6,30 +7,29 @@ class Student extends Model {}
 Student.init(
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
 
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: true
     },
 
     grade: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
 
-    class_room_id: {
-      type: Sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'class_room',
-        key: 'id'
-      }
-    }
+    // class_room_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: 'class_room',
+    //     key: 'id'
+    //   }
+    // }
   },
   {
     sequelize,

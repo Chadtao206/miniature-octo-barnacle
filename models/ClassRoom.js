@@ -1,24 +1,25 @@
-const sequelize = require('./connection');
+const sequelize = require('../connection');
+const { DataTypes } = require('sequelize');
 const { Model } = require('sequelize');
 
 class ClassRoom extends Model {}
 
-Student.init(
+ClassRoom.init(
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
 
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 
     code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     }
@@ -31,4 +32,4 @@ Student.init(
   }
 )
 
-module.exports = Student;
+module.exports = ClassRoom;
