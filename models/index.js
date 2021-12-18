@@ -1,11 +1,11 @@
 const ClassRoom = require("./ClassRoom");
 const Student = require("./Student");
 
-Student.belongsTo(ClassRoom, {
+ClassRoom.hasMany(Student, {
   constraints: false
 })
 
-ClassRoom.hasMany(Student, {
+Student.belongsTo(ClassRoom, {
   constraints: false
 })
 

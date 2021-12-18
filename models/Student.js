@@ -23,18 +23,20 @@ Student.init(
       allowNull: true,
     },
 
-    // class_room_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'class_room',
-    //     key: 'id'
-    //   }
-    // }
+    class_room_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'class_room',
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,
     modelName: 'student',
     timestamps: true,
+    underscored: true,
     freezeTableName: true,
   }
 )
