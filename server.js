@@ -1,8 +1,22 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const app = express();
-
 const PORT = 3000;
+const { DATBASE_URL } = process.env;
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+})
+
+
+module.exports = sequelize;
 
 const ourOwnMiddlewareFunction = (req, res, next) => {
   console.log("I'm IN THE MIDDLEWARE FUNCTION ", req.body);
@@ -40,4 +54,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./frontend/index.html"));
 });
 
-app.listen(PORT, () => console.log("server is up and running on port -", PORT));
+sequelize.sync({ force: true })
+.then(() => {
+  app.listen(PORT, () => console.log(`server is up and running on port - http://localhost:${PORT} 🚀`));
+});
